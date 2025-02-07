@@ -13,6 +13,7 @@
 #include <wayland-client.h>
 #include <wayland-util.h>
 #include <xkbcommon/xkbcommon.h>
+#include "src/modules.h"
 #include "tofi.h"
 #include "compgen.h"
 #include "drun.h"
@@ -1030,6 +1031,8 @@ static bool do_submit(struct tofi *tofi)
 			}
 		}
 		if (app == NULL) {
+            if (modules_try_execute(res, entry->input_utf8))
+                return true;
 			log_error("Couldn't find application file! This shouldn't happen.\n");
 			return false;
 		}
@@ -1200,6 +1203,8 @@ int main(int argc, char *argv[])
 		.require_match = true,
 		.use_scale = true,
 		.physical_keybindings = true,
+        .module_math = true,
+        .module_search = false
 	};
 	wl_list_init(&tofi.output_list);
 	if (getenv("TERMINAL") != NULL) {

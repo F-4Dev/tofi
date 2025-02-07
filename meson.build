@@ -116,6 +116,7 @@ common_sources = files(
   'src/surface.c',
   'src/unicode.c',
   'src/xmalloc.c',
+  'src/modules.c',
 )
 
 compgen_sources = files(

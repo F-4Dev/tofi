@@ -630,6 +630,10 @@ options.
 >
 > Default: true
 
+## MODULES
+**module-math**=true|false
+> Calculate Math equations inside the Input field. The Calculation result will appear inside the result-suggestions, when Selecting this result it will be copied to clipboard and a notification will be sent
+
 ## COLORS
 
 Colors can be specified in the form *RGB*, *RGBA*, *RRGGBB* or

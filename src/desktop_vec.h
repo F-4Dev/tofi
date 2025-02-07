@@ -35,8 +35,10 @@ void desktop_vec_add_file(struct desktop_vec *desktop, const char *id, const cha
 
 void desktop_vec_sort(struct desktop_vec *restrict vec);
 struct desktop_entry *desktop_vec_find_sorted(struct desktop_vec *restrict vec, const char *name);
+struct tofi;
 struct string_ref_vec desktop_vec_filter(
-		const struct desktop_vec *restrict vec,
+		struct tofi *tofi,
+        const struct desktop_vec *restrict vec,
 		const char *restrict substr,
 		enum matching_algorithm algorithm);
 

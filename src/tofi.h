@@ -104,6 +104,8 @@ struct tofi {
 	bool print_index;
 	bool multiple_instance;
 	bool physical_keybindings;
+    bool module_math;
+    bool module_search;
 	char target_output_name[MAX_OUTPUT_NAME_LEN];
 	char default_terminal[MAX_TERMINAL_NAME_LEN];
 	char history_file[MAX_HISTORY_FILE_NAME_LEN];

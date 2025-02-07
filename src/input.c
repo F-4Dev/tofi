@@ -203,7 +203,7 @@ void add_character(struct tofi *tofi, xkb_keycode_t keycode)
 		entry->input_utf8_length += len;
 
 		if (entry->mode == TOFI_MODE_DRUN) {
-			struct string_ref_vec results = desktop_vec_filter(&entry->apps, entry->input_utf8, tofi->matching_algorithm);
+			struct string_ref_vec results = desktop_vec_filter(tofi, &entry->apps, entry->input_utf8, tofi->matching_algorithm);
 			string_ref_vec_destroy(&entry->results);
 			entry->results = results;
 		} else {
@@ -241,7 +241,7 @@ void input_refresh_results(struct tofi *tofi)
 	entry->input_utf8_length = bytes_written;
 	string_ref_vec_destroy(&entry->results);
 	if (entry->mode == TOFI_MODE_DRUN) {
-		entry->results = desktop_vec_filter(&entry->apps, entry->input_utf8, tofi->matching_algorithm);
+		entry->results = desktop_vec_filter(tofi, &entry->apps, entry->input_utf8, tofi->matching_algorithm);
 	} else {
 		entry->results = string_ref_vec_filter(&entry->commands, entry->input_utf8, tofi->matching_algorithm);
 	}

@@ -6,6 +6,7 @@
 #include "string_vec.h"
 #include "unicode.h"
 #include "xmalloc.h"
+#include "modules.h"
 
 static bool match_current_desktop(char * const *desktop_list, gsize length);
 
@@ -148,6 +149,7 @@ struct desktop_entry *desktop_vec_find_sorted(struct desktop_vec *restrict vec, 
 }
 
 struct string_ref_vec desktop_vec_filter(
+        struct tofi *tofi,
 		const struct desktop_vec *restrict vec,
 		const char *restrict substr,
 		enum matching_algorithm algorithm)
@@ -175,6 +177,10 @@ struct string_ref_vec desktop_vec_filter(
 			}
 		}
 	}
+
+    // add suggestions form enabled modules
+    modules_suggest(tofi, substr, &filt);
+
 	/*
 	 * Sort the results by this search_score. This moves matches at the beginnings
 	 * of words to the front of the result list.

@@ -766,6 +766,16 @@ bool parse_option(struct tofi *tofi, const char *filename, size_t lineno, const 
 		if (!err) {
 			tofi->use_scale = val;
 		}
+    } else if (strcasecmp(option, "module-math") == 0) {
+        bool val = parse_bool(filename, lineno, value, &err);
+        if (!err) {
+        tofi->module_math = val;
+        }
+    } else if (strcasecmp(option, "module-search") == 0) {
+        bool val = parse_bool(filename, lineno, value, &err);
+        if (!err) {
+            tofi->module_search = val;
+        }
 	} else {
 		PARSE_ERROR(filename, lineno, "Unknown option \"%s\"\n", option);
 		err = true;
