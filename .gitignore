@@ -61,4 +61,9 @@ tags
 
 # Project specific files
 build/
+src/build/
+src/meson-info/
+src/meson-logs/
+src/compile_commands.json
+src/build.ninja
 .cache
