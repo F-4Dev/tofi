@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install build-essential llvm clang meson scdoc \
+          sudo apt-get install build-essential llvm clang meson scdoc qalc \
           ninja-build libfreetype-dev libharfbuzz-dev libcairo-dev \
           libpango1.0-dev libwayland-dev wayland-protocols libxkbcommon-dev \
           python3-pip
@@ -59,7 +59,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install build-essential llvm clang meson scdoc \
+          sudo apt-get install build-essential llvm clang meson scdoc qalc \
           ninja-build libfreetype-dev libharfbuzz-dev libcairo-dev \
           libpango1.0-dev libwayland-dev wayland-protocols libxkbcommon-dev \
           python3-pip
