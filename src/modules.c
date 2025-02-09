@@ -67,6 +67,7 @@ bool module_search_selected(char *restrict query) {
 
 void modules_suggest(struct tofi *tofi, char *restrict query,
                      struct string_ref_vec *filt) {
+  if (strlen(query) == 0) return;
   if (tofi->module_math)
     module_math_suggestion(query, filt);
   if (tofi->module_search)
