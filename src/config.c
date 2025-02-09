@@ -769,13 +769,17 @@ bool parse_option(struct tofi *tofi, const char *filename, size_t lineno, const 
     } else if (strcasecmp(option, "module-math") == 0) {
         bool val = parse_bool(filename, lineno, value, &err);
         if (!err) {
-        tofi->module_math = val;
+        tofi->modules.math.enabled = val;
         }
     } else if (strcasecmp(option, "module-search") == 0) {
         bool val = parse_bool(filename, lineno, value, &err);
         if (!err) {
-            tofi->module_search = val;
+            tofi->modules.search.enabled = val;
         }
+	} else if (strcasecmp(option, "module-search-browser") == 0) {
+        snprintf(tofi->modules.search.browser, N_ELEM(tofi->modules.search.browser), "%s", value);
+	} else if (strcasecmp(option, "module-search-engine") == 0) {
+        snprintf(tofi->modules.search.engine, N_ELEM(tofi->modules.search.engine), "%s", value);
 	} else {
 		PARSE_ERROR(filename, lineno, "Unknown option \"%s\"\n", option);
 		err = true;

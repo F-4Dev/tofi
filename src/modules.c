@@ -55,8 +55,12 @@ void module_search_suggestion(char *restrict query,
   string_ref_vec_add(filt, "?search");
 }
 
-bool module_search_selected(char *restrict query) {
-  char command[128] = "firefox --search \"";
+bool module_search_selected(struct tofi *tofi, char *restrict query) {
+  char command[128] = "";
+  strncat(command, tofi->modules.search.browser, sizeof(command)-1);
+  strncat(command, " \"", sizeof(command)-1);
+  strncat(command, tofi->modules.search.engine, sizeof(command)-1);
+  strncat(command, "?q=", sizeof(command) - 1);
   strncat(command, query, sizeof(command) - 1);
   strncat(command, "\"", sizeof(command) - 1);
 
@@ -67,21 +71,27 @@ bool module_search_selected(char *restrict query) {
 
 void modules_suggest(struct tofi *tofi, char *restrict query,
                      struct string_ref_vec *filt) {
+  // prevent modules from suggesting when the input is empty
   if (strlen(query) == 0) return;
-  if (tofi->module_math)
+
+  if (tofi->modules.math.enabled)
     module_math_suggestion(query, filt);
-  if (tofi->module_search)
+  if (tofi->modules.search.enabled)
     module_search_suggestion(query, filt);
 }
 
-bool modules_try_execute(char *suggestion, char *restrict query) {
+bool modules_try_execute(struct tofi *tofi, char *suggestion, char *restrict query) {
   char prefix = suggestion[0];
   // remove first character (prefix)
   suggestion++;
   switch (prefix) {
   case '=':
-    return module_math_selected(suggestion, query);
+    if (tofi->modules.math.enabled)
+      return module_math_selected(suggestion, query);
   case '?':
-    return module_search_selected(query);
+    if (tofi->modules.search.enabled)
+      return module_search_selected(tofi, query);
+  default:
+    return false;
   }
 }

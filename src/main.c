@@ -1031,7 +1031,7 @@ static bool do_submit(struct tofi *tofi)
 			}
 		}
 		if (app == NULL) {
-            if (modules_try_execute(res, entry->input_utf8))
+            if (modules_try_execute(tofi, res, entry->input_utf8))
                 return true;
 			log_error("Couldn't find application file! This shouldn't happen.\n");
 			return false;
@@ -1203,8 +1203,16 @@ int main(int argc, char *argv[])
 		.require_match = true,
 		.use_scale = true,
 		.physical_keybindings = true,
-        .module_math = true,
-        .module_search = false
+        .modules = {
+            .math = {
+                .enabled = true
+            },
+            .search = {
+                .enabled = false,
+                .browser = "firefox",
+                .engine = "google.com/search"
+            }
+        }
 	};
 	wl_list_init(&tofi.output_list);
 	if (getenv("TERMINAL") != NULL) {
