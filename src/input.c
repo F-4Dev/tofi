@@ -26,10 +26,6 @@ static void reset_selection(struct tofi *tofi);
 
 void input_handle_keypress(struct tofi *tofi, xkb_keycode_t keycode)
 {
-	if (tofi->xkb_state == NULL) {
-		return;
-	}
-
 	bool ctrl = xkb_state_mod_name_is_active(
 			tofi->xkb_state,
 			XKB_MOD_NAME_CTRL,
@@ -42,6 +38,14 @@ void input_handle_keypress(struct tofi *tofi, xkb_keycode_t keycode)
 			tofi->xkb_state,
 			XKB_MOD_NAME_SHIFT,
 			XKB_STATE_MODS_EFFECTIVE);
+
+	if (tofi->xkb_state == NULL) {
+		return;
+	}
+	// Ignore "-char to prevent escaping the commands used for math and search
+	if (11 == keycode && shift) {
+		return;
+	}
 
 	uint32_t ch = xkb_state_key_get_utf32(tofi->xkb_state, keycode);
 
