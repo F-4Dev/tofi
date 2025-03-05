@@ -62,7 +62,7 @@ bool module_search_selected(struct tofi *tofi, char *restrict query) {
   strncat(command, tofi->modules.search.engine, sizeof(command)-1);
   strncat(command, "?q=", sizeof(command) - 1);
   strncat(command, query, sizeof(command) - 1);
-  strncat(command, "\"", sizeof(command) - 1);
+  strncat(command, "\" &", sizeof(command) - 1);
 
   system(command);
   // return is here to avoid an ugly switch
