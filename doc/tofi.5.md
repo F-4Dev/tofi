@@ -631,8 +631,31 @@ options.
 > Default: true
 
 ## MODULES
-**module-math**=true|false
-> Calculate Math equations inside the Input field. The Calculation result will appear inside the result-suggestions, when Selecting this result it will be copied to clipboard and a notification will be sent
+
+Modules provide additional functionallity to tofi. All a module does is append
+another suggestion to the displayed list. Each module has a unique Prefix, you
+can execute an module by - as normal - pressing enter while the suggestion is
+selected. **Please be aware that modules execute commands using your input as arguments. This could be dangerous since commands can be escaped by `&&` and alikes. Act carefull and know the risks.**
+
+**module-math**=*true\|false*
+> Calculate Math equations inside the Input field. The Result will be shown inside the suggestions. When executing this module the result will be copied to clipboard and a notification is send. This module has the preifx: `=`.
+>
+> Default: true
+
+**module-search**=*true\|false*
+> Will forward what you've written in the Input Field to an browser in form of a search query. This module has the prefix `?`.
+>
+> Default: false
+
+**module-search-engine**=*string* 
+> You can customize the searchengine by chaning the base URL (without https:// !). The module will append the query (`?q=TEXT`) to the url ending, thus every searchenging using this format is supported! 
+>
+> Default: "google.com/search"
+
+**module-search-browser**=*string*
+> The browser used to search can naturally also be changed, this is the command with which will open the browser (not the browser displayname!).
+>
+> Default: "firefox"
 
 ## COLORS
 
