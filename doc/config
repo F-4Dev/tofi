@@ -313,6 +313,25 @@
 	ascii-input = false
 
 #
+### Modules
+#
+	# Enable the Math module. A result will be appended to the suggestions
+	# prefixed with "=". Executing this result will copy the math result and
+	# send a notification.
+	module-math = true
+
+	# Enable the Search module. A result will be appended to the suggestions
+	# prefixed with "?". Executing this result will open a browser window
+	# and do a search with the given prompt.
+	module-search = true
+
+	# changes the prefix of the url which will be opend to customize searchengines.
+	module-search-engine = "google.com/search"
+
+	# changes the command which will be used to open the url.
+	module-search-browser = "firefox"
+
+#
 ### Inclusion
 #
 	# Configs can be split between multiple files, and then included
